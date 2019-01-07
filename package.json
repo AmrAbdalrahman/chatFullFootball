@@ -1,0 +1,25 @@
+{
+  "name": "fullchatfootball",
+  "version": "1.0.0",
+  "description": "A chat application build with node, mongodb, expressand socket.io",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://AmrAhmed22@bitbucket.org/AmrAhmed22/chatfullfootball.git"
+  },
+  "author": "Amr Almagic",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/AmrAhmed22/chatfullfootball#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dependable": "^1.1.0",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "express-promise-router": "^3.0.3",
+    "lodash": "^4.17.11"
+  }
+}

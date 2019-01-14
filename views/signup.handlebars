@@ -48,18 +48,20 @@
 
 <div id="main">
     <div class="main">
-        <form action="/" method="post">
+        <form action="/signup" method="post">
 
             <h1>
-                Login
+                Register
             </h1>
 
 
             {{#if hasErrors}}
 
+
+
+
                 <div class="alert alert-danger text-center">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-
                     {{#each messages}}
                         {{this}} <br>
                     {{/each}}
@@ -67,9 +69,15 @@
                 </div>
 
 
+
             {{/if}}
 
             <div class="inset">
+                <p>
+                    <label for="username">USERNAME</label>
+                    <input type="text" name="username" class="" placeholder="">
+                </p>
+
                 <p>
                     <label for="email">EMAIL ADDRESS</label>
                     <input type="text" name="email" placeholder=""/>
@@ -82,8 +90,8 @@
             </div>
 
             <p class="p-container">
-                <span><a href="/signup">Not Yet Registered?</a></span>
-                <input type="submit" class="login-log" style=" background: #3bb5ec; border: #3bb5ec;" value="Login">
+                <span><a href="/">Login</a></span>
+                <input type="submit" class="login-log" style=" background: #3bb5ec; border: #3bb5ec;" value="Register">
             </p>
         </form>
     </div>

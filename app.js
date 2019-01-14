@@ -2,10 +2,30 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const http = require('http');
+const cookieParser = require('cookie-parser');
+const validator = require('express-validator');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const mongoose = require('mongoose');
+const flash = require('connect-flash');
+const passport = require('passport');
+
 const container = require('./container');
 
 
-container.resolve(function (users) {
+container.resolve(function (users,_) {
+
+    //Map global promise - get rid of warning
+    mongoose.Promise = global.Promise;
+
+//Mongoose Connect
+    mongoose.connect('mongodb://localhost/footballkik', {useNewUrlParser: true}).then(() => {
+        console.log('MongoDB Connected');
+    }).catch(err => console.log(err));
+    mongoose.set('useFindAndModify', false);
+    mongoose.set('useCreateIndex', true);
+    mongoose.set('useNewUrlParser', true);
+
 
     const app = SetupExpress();
 
@@ -26,16 +46,35 @@ container.resolve(function (users) {
 
 
     function ConfigureExpress(app) {
+        require('./passport/passport-local');
+
+        app.use(express.static('public'));
+        app.use(cookieParser());
+        app.set('view engine', 'handlebars');
         //Handle Middleware
         app.engine('handlebars', exphbs({
             defaultLayout: 'main'
         }));
-        app.use(express.static('public'));
-        app.set('view engine', 'handlebars');
 
         //Body Parser Middleware
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({extended: true}));
+
+
+        app.use(validator());
+        app.use(session({
+            secret: 'magicanochat',
+            resave: true,
+            saveUninitialized: true,
+            store: new MongoStore({mongooseConnection: mongoose.connection})
+        }));
+
+        app.use(flash());
+
+        app.use(passport.initialize());
+        app.use(passport.session());
+
+        app.locals._ = _;
     }
 
 

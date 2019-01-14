@@ -1,15 +1,49 @@
 'use strict';
 
-module.exports = function (_) {
+module.exports = function (_, passport,User) {
 
     return {
 
         SetRouting: function (router) {
-            router.get('/', this.indexPage)
+            router.get('/', this.indexPage);
+            router.get('/signup', this.getSignUp);
+            //login
+            router.post('/', User.LoginValidation,this.postLogin);
+            router.post('/signup',User.SignUpValidation ,this.postSignUp);
+            router.get('/home',this.homePage);
+
+
         },
 
-        indexPage: function (req,res) {
-            return res.render('index',{test: 'this is a testttt'})
+        indexPage: function (req, res) {
+            const errors = req.flash('error');
+            return res.render('index',{title: 'Footballkk | login',messages: errors,hasErrors: errors.length > 0})
+        },
+
+        postLogin: passport.authenticate('local.login', {
+            successRedirect: '/home',
+            failureRedirect: '/',
+            failureFlash: true
+
+        }),
+
+
+        getSignUp: function (req, res) {
+            const errors = req.flash('error');
+            return res.render('signup',{title: 'Footballkk | SignUp',messages: errors,hasErrors: errors.length > 0});
+        },
+
+        postSignUp: passport.authenticate('local.signup', {
+            successRedirect: '/home',
+            failureRedirect: '/signup',
+            failureFlash: true
+
+        }),
+
+
+
+        homePage: function (req, res) {
+            return res.render('home');
         }
-    }
+}
 }

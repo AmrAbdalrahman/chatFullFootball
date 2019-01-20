@@ -13,7 +13,7 @@ const passport = require('passport');
 const container = require('./container');
 
 
-container.resolve(function (users,_) {
+container.resolve(function (users,_,admin) {
 
     //Map global promise - get rid of warning
     mongoose.Promise = global.Promise;
@@ -40,6 +40,7 @@ container.resolve(function (users,_) {
         //Setup router
         const router = require('express-promise-router')();
         users.SetRouting(router);
+        admin.SetRouting(router);
 
         app.use(router);
     }

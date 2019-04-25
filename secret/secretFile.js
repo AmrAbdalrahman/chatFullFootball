@@ -14,4 +14,5 @@ module.exports = {
         region: 'us-east-2'
 
     }
-}
+
+};

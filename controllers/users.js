@@ -5,6 +5,13 @@ module.exports = function (_, passport, User) {
     return {
 
         SetRouting: function (router) {
+
+            router.all('/*', (req, res, next) => {
+
+                req.app.locals.layout = 'main';
+                next();
+            });
+
             router.get('/', this.indexPage);
             router.get('/signup', this.getSignUp);
 

@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
+const express_handlebars_sections = require('express-handlebars-sections');
 const http = require('http');
 const cookieParser = require('cookie-parser');
 const validator = require('express-validator');
@@ -13,7 +14,13 @@ const passport = require('passport');
 const container = require('./container');
 
 
-container.resolve(function (users,_,admin) {
+//Handlebars Helpers
+const {
+    cssFiles
+} = require('./helpers/hbs')
+
+
+container.resolve(function (users,_,admin, home) {
 
     //Map global promise - get rid of warning
     mongoose.Promise = global.Promise;
@@ -41,6 +48,7 @@ container.resolve(function (users,_,admin) {
         const router = require('express-promise-router')();
         users.SetRouting(router);
         admin.SetRouting(router);
+        home.SetRouting(router);
 
         app.use(router);
     }
@@ -56,6 +64,11 @@ container.resolve(function (users,_,admin) {
         app.set('view engine', 'handlebars');
         //Handle Middleware
         app.engine('handlebars', exphbs({
+
+            helpers: {
+              //  cssFiles: cssFiles,
+                section: express_handlebars_sections(),  // CONFIGURE 'express_handlebars_sections'
+            },
             defaultLayout: 'main'
         }));
 

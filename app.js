@@ -10,6 +10,7 @@ const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const passport = require('passport');
+const SocketIO = require('socket.io');
 
 const container = require('./container');
 
@@ -20,7 +21,7 @@ const {
 } = require('./helpers/hbs')
 
 
-container.resolve(function (users,_,admin, home) {
+container.resolve(function (users,_,admin, home, group) {
 
     //Map global promise - get rid of warning
     mongoose.Promise = global.Promise;
@@ -39,16 +40,21 @@ container.resolve(function (users,_,admin, home) {
     function SetupExpress() {
         const app = express();
         const server = http.createServer(app);
+        const io = SocketIO(server);
+
         server.listen(3000, function () {
             console.log('Listening on port 3000');
         });
         ConfigureExpress(app);
+
+        require('./socket/groupChat')(io);
 
         //Setup router
         const router = require('express-promise-router')();
         users.SetRouting(router);
         admin.SetRouting(router);
         home.SetRouting(router);
+        group.SetRouting(router);
 
         app.use(router);
     }
@@ -58,6 +64,8 @@ container.resolve(function (users,_,admin, home) {
         require('./passport/passport-local');
         require('./passport/passport-facebook');
         require('./passport/passport-google');
+
+
 
         app.use(express.static('public'));
         app.use(cookieParser());

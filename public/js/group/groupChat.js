@@ -1,14 +1,36 @@
 $(document).ready(function () {
 
     //get from global io variable from top call script
-    var socket = io();
+    let socket = io();
+
+    let room = $('#groupName').val();
+    let sender = $('#sender').val();
 
     socket.on('connect', function () {
         console.log('Yea! User Connected');
+
+        let params = {
+            room: room
+        };
+
+        //join to current club
+        socket.emit('join', params, function () {
+            console.log('User has joined this channel');
+        });
+
+
     });
 
     socket.on('newMessage', function (data) {
-        console.log(data);
+
+        let template = $('#message-template').html();
+        let message = Mustache.render(template, {
+            text: data.text,
+            sender: data.from,
+        });
+
+        $('#messages').append(message);
+
     });
 
 
@@ -16,11 +38,17 @@ $(document).ready(function () {
         //to prevent load submit
         e.preventDefault();
 
-        var msg = $('#msg').val();
+        let msg = $('#msg').val();
 
-        socket.emit('createMessage',{
-            text: msg
+        socket.emit('createMessage', {
+            text: msg,
+            room: room,
+            sender: sender
+        }, function () {
+            $('#msg').val('');
         });
     });
 
 });
+
+

@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
-const express_handlebars_sections = require('express-handlebars-sections');
+const helpers = require('handlebars-helpers')();
 const http = require('http');
 const cookieParser = require('cookie-parser');
 const validator = require('express-validator');
@@ -16,9 +16,9 @@ const container = require('./container');
 
 
 //Handlebars Helpers
-const {
-    cssFiles
-} = require('./helpers/hbs')
+/*const {
+    ifCond
+} = require('./helpers/hbs');*/
 
 
 container.resolve(function (users,_,admin, home, group) {
@@ -71,12 +71,16 @@ container.resolve(function (users,_,admin, home, group) {
         app.use(cookieParser());
         app.set('view engine', 'handlebars');
         //Handle Middleware
+
         app.engine('handlebars', exphbs({
 
-            helpers: {
+            helpers: require('./helpers/hbs').helpers
+             /*   {
               //  cssFiles: cssFiles,
-                section: express_handlebars_sections(),  // CONFIGURE 'express_handlebars_sections'
-            },
+                section: express_handlebars_sections(),
+                    compare:
+
+            }*/,
             defaultLayout: 'main'
         }));
 

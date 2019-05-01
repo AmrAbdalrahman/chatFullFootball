@@ -15,7 +15,8 @@ module.exports = function () {
         groupPage: function (req, res) {
             const name = req.params.name;
 
-            res.render('groupChat/group', {title: 'Footballkik - Group', name: name});
+            res.render('groupChat/group', {title: 'Footballkik - Group',
+                groupName: name, user: req.user});
         }
     }
 

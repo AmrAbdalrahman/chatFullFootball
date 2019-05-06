@@ -10,7 +10,8 @@ $(document).ready(function () {
         console.log('Yea! User Connected');
 
         let params = {
-            room: room
+            room: room,
+            name: sender
         };
 
         //join to current club
@@ -19,6 +20,10 @@ $(document).ready(function () {
         });
 
 
+    });
+
+    socket.on('usersList', function (users) {
+        console.log(users);
     });
 
     socket.on('newMessage', function (data) {

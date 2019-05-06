@@ -11,6 +11,7 @@ const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const passport = require('passport');
 const SocketIO = require('socket.io');
+const  {Users} = require('./helpers/UsersClass');
 
 const container = require('./container');
 
@@ -47,7 +48,7 @@ container.resolve(function (users,_,admin, home, group) {
         });
         ConfigureExpress(app);
 
-        require('./socket/groupChat')(io);
+        require('./socket/groupChat')(io, Users);
 
         //Setup router
         const router = require('express-promise-router')();

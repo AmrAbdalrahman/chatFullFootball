@@ -23,7 +23,18 @@ $(document).ready(function () {
     });
 
     socket.on('usersList', function (users) {
-        console.log(users);
+
+        let ol = $('<ol></ol>');
+
+        for (let i = 0; i < users.length; i++) {
+
+            ol.append('<p><a id="val" data-toggle="modal" data-target="#myModal">' + users[i] + '</a></p>');
+        }
+
+        $('#numValue').text('('+users.length+')');
+
+        $('#users').html(ol);
+
     });
 
     socket.on('newMessage', function (data) {

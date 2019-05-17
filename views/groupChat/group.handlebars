@@ -120,7 +120,7 @@
                             <form id="message-form" method="post">
                                 <input type="hidden" id="groupName" value="{{groupName}}">
                                 <input type="hidden" name="sender" id="sender"
-                                       value="{{#if user.username }}{{user.username}}{{else}}{{user.fullname}}{{/if}}">
+                                       value="{{user.username}}">
 
                                 <textarea class="form-control" name="message" id="msg"
                                           placeholder="Type a message"></textarea>
@@ -163,7 +163,7 @@
                                     <div class="modal-body">
                                         <form action="" method="get" id="add_friend">
                                             <input type="hidden" name="receiverName" id="receiverName" value="">
-                                            <input type="hidden" name="sender-name" id="sender-name" value="">
+                                            <input type="hidden" name="sender-name" id="sender-name" value="{{user.username}}">
                                             <button type="submit" id="friend-add" class="btn add"><i
                                                     class="fa fa-user"></i> Add Friend
                                             </button>
@@ -201,6 +201,7 @@
 {{#section 'script'}}
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/group/groupChat.js"></script>
+    <script src="/js/group/sendRequest.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
 {{/section}}
 

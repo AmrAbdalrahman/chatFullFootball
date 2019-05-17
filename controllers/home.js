@@ -47,7 +47,7 @@ module.exports =  function (async, Club, _) {
 
                 const countrySort = _.sortBy(res2,'_id');
 
-                res.render('home', {title: 'Footballkik - Home', data: dataChunk,
+                res.render('home', {title: 'Footballkik - Home',user: req.user ,data: dataChunk,
                 countries: countrySort});
             })
 

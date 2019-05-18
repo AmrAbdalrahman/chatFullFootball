@@ -16,9 +16,22 @@ module.exports = function (Users, async) {
         groupPage: function (req, res) {
             const name = req.params.name;
 
-            res.render('groupChat/group', {
-                title: 'Footballkik - Group',
-                groupName: name, user: req.user
+            async.parallel([
+                function (callback) {
+                    Users.findOne({'username': req.user.username})
+                        .populate('request.userId')
+                        .exec((err, result) => {
+                            callback(err, result);
+                        })
+                }
+            ], (err, results) => {
+                const result1 = results[0];
+                res.render('groupChat/group', {
+                    title: 'Footballkik - Group',
+                    groupName: name, user: req.user,
+                    data: result1
+                });
+
             });
         },
 
@@ -50,16 +63,18 @@ module.exports = function (Users, async) {
                             'username': req.user.username,
                             'sentRequest.username': {$ne: req.body.receiveName},
                         }, {
-                            $push: {sentRequest: {
+                            $push: {
+                                sentRequest: {
                                     username: req.body.receiveName
-                                }}
-                        },(err,count)=>{
+                                }
+                            }
+                        }, (err, count) => {
                             callback(err, count);
                         })
                     }
                 }
-            ],(err, results) => {
-                res.redirect('/group/'+req.params.name);
+            ], (err, results) => {
+                res.redirect('/group/' + req.params.name);
             });
         }
     }

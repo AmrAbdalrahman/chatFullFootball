@@ -12,6 +12,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const SocketIO = require('socket.io');
 const  {Users} = require('./helpers/UsersClass');
+const  {Global} = require('./helpers/Global');
 
 const container = require('./container');
 
@@ -50,6 +51,7 @@ container.resolve(function (users,_,admin, home, group) {
 
         require('./socket/groupChat')(io, Users);
         require('./socket/friend')(io);
+        require('./socket/globalRoom')(io,Global);
 
         //Setup router
         const router = require('express-promise-router')();

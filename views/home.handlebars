@@ -12,6 +12,8 @@
 
 
 <div class="col-md-12">
+    <input type="hidden" id="name-user" value="{{user.username}}">
+    <input type="hidden" id="name-image" value="{{user.userImage}}">
     <form action="#" method="post">
         <div class="form-group ad-30" style="margin-top:8px;">
             <div class="input-group search-style">
@@ -116,4 +118,5 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/group/sendRequest.js"></script>
     <script src="/js/home.js"></script>
+    <script src="/js/global.js"></script>
 {{/section}}

@@ -6,6 +6,11 @@
     {{title}}
 {{/section}}
 
+{{#section 'header'}}
+    {{> _header}}
+{{/section}}
+
+
 <div class="col-md-12">
     <form action="#" method="post">
         <div class="form-group ad-30" style="margin-top:8px;">
@@ -53,13 +58,13 @@
             <div class="col-md-9">
                 <div>
 
-                    {{#each data}}
+                    {{#each chunks}}
                         <div class="category-list">
                             <div class="row">
 
                                 {{#each this}}
 
-                                    <form action="#" method="post" id="add-fav">
+                                    <form action="/home" method="post" id="favourite">
                                         <div class="item col-md-4">
 
                                             <a style="text-decoration: none" href="/group/{{name}}">
@@ -67,7 +72,7 @@
                                             <div class="thumbnail">
                                                 <img src="https://footballkik.s3.amazonaws.com/{{image}}" alt="">
                                                 <div class="caption">
-                                                    <h4>{{name}}</h4>
+                                                    <h4>{{name}} ({{fans.length}})</h4>
 
                                                     <div class="row">
                                                         <div class="col-xs-12 col-md-6">
@@ -77,6 +82,8 @@
                                                         </div>
 
                                                         <div class="col-xs-12 col-md-6">
+                                                            <input type="hidden" name="id" id="id" value="{{_id}}">
+                                                            <input type="hidden" name="clubName" id="club_Name" value="{{name}}">
                                                             <button class="btn add-fav">
                                                                 Add To Favorite
                                                             </button>
@@ -103,3 +110,10 @@
         </div>
     </div>
 </div>
+
+
+{{#section 'script'}}
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/group/sendRequest.js"></script>
+    <script src="/js/home.js"></script>
+{{/section}}

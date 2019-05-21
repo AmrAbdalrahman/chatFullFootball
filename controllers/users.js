@@ -94,4 +94,4 @@ module.exports = function (_, passport, User) {
         },
 
     }
-}
+};

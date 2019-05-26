@@ -7,14 +7,14 @@
 {{/section}}
 
 {{#section 'header'}}
-    {{> _header}}
+    {{> _headerResults}}
 {{/section}}
 
 
 <div class="col-md-12">
     <input type="hidden" id="name-user" value="{{user.username}}">
     <input type="hidden" id="name-image" value="{{user.userImage}}">
-    <form action="/results" method="post">
+    <form action="#" method="post">
         <div class="form-group ad-30" style="margin-top:8px;">
             <div class="input-group search-style">
                 <input class="form-control new-search-bar" name="country" id="search" placeholder="Enter Your Club Name"
@@ -69,30 +69,30 @@
                                     <form action="/home" method="post" id="favourite">
                                         <div class="item col-md-4">
 
-                                            <a style="text-decoration: none" href="/group/{{replace name " " "-"}}">
+                                            <a style="text-decoration: none" href="/group/{{name}}">
 
-                                            <div class="thumbnail">
-                                                <img src="https://footballkik.s3.amazonaws.com/{{image}}" alt="">
-                                                <div class="caption">
-                                                    <h4>{{name}} ({{fans.length}})</h4>
+                                                <div class="thumbnail">
+                                                    <img src="https://footballkik.s3.amazonaws.com/{{image}}" alt="">
+                                                    <div class="caption">
+                                                        <h4>{{name}} ({{fans.length}})</h4>
 
-                                                    <div class="row">
-                                                        <div class="col-xs-12 col-md-6">
-                                                            <p>
-                                                                {{country}}
-                                                            </p>
-                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-xs-12 col-md-6">
+                                                                <p>
+                                                                    {{country}}
+                                                                </p>
+                                                            </div>
 
-                                                        <div class="col-xs-12 col-md-6">
-                                                            <input type="hidden" name="id" id="id" value="{{_id}}">
-                                                            <input type="hidden" name="clubName" id="club_Name" value="{{name}}">
-                                                            <button class="btn add-fav">
-                                                                Add To Favorite
-                                                            </button>
+                                                            <div class="col-xs-12 col-md-6">
+                                                                <input type="hidden" name="id" id="id" value="{{_id}}">
+                                                                <input type="hidden" name="clubName" id="club_Name" value="{{name}}">
+                                                                <button class="btn add-fav">
+                                                                    Add To Favorite
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
                                             </a>
 

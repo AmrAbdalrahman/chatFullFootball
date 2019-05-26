@@ -23,7 +23,7 @@ const container = require('./container');
 } = require('./helpers/hbs');*/
 
 
-container.resolve(function (users,_,admin, home, group) {
+container.resolve(function (users,_,admin, home, group,results) {
 
     //Map global promise - get rid of warning
     mongoose.Promise = global.Promise;
@@ -59,6 +59,7 @@ container.resolve(function (users,_,admin, home, group) {
         admin.SetRouting(router);
         home.SetRouting(router);
         group.SetRouting(router);
+        results.SetRouting(router);
 
         app.use(router);
     }

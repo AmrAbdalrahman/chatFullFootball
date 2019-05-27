@@ -20,7 +20,7 @@ $(document).ready(function () {
         let friend = friends.split('@');
       //  friend.shift();
 
-        let name = $('#name-user').val();
+        let name = $('#name-user').val().toLowerCase();
         let ol = $('<div></div>');
         let arr = [];
 

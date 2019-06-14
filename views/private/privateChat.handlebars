@@ -107,6 +107,41 @@
 
                             <ul id="messages" class="list-unstyled">
 
+                                {{#compare chats.length ">" 0 }}
+                                    {{#each chats}}
+                                        {{#ifCond ../name '===' (lowercase receiver.username)}}
+                                            <li class="left">
+                                       <span class="chat-img1 pull-left">
+                                           <img src="http://placehold.it/300x300" class="img-circle" alt="">
+                                       </span>
+                                                <div class="chat-body1">
+                                                    <span class="chat-name">{{senderName}}</span>
+                                                    <br>
+                                                    {{message}}
+
+                                                </div>
+                                            </li>
+
+                                            {{#ifCond ../name '===' (lowercase sender.username)}}
+                                                <li class="left">
+                                       <span class="chat-img1 pull-left">
+                                           <img src="http://placehold.it/300x300" class="img-circle" alt="">
+                                       </span>
+                                                    <div class="chat-body1">
+                                                        <span class="chat-name">{{senderName}}</span>
+                                                        <br>
+                                                        {{message}}
+
+                                                    </div>
+                                                </li>
+                                            {{/ifCond}}
+
+
+                                        {{/ifCond}}
+                                    {{/each}}
+                                {{/compare}}
+
+
                             </ul>
 
                             <script id="message-template" type="text/template">
@@ -157,6 +192,7 @@
 {{#section 'script'}}
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/privateChat/pm.js"></script>
+    <script src="/js/messagelink.js"></script>
     <script src="/js/group/sendRequest.js"></script>
     <script src="/js/global.js"></script>
     <script src="/js/deparam.js"></script>

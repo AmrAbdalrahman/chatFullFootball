@@ -10,6 +10,7 @@ const simpleDependecies = [
     ['Club','./models/clubs'],
     ['Users','./models/user'],
     ['Message','./models/message'],
+    ['Group', './models/groupmessage'],
     ['aws', './helpers/AWSUpload']
 ];
 

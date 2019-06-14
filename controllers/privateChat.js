@@ -1,6 +1,13 @@
-module.exports = function(async, Users, Message){
+module.exports = function(async, Users, Message, FriendResult){
     return {
         SetRouting: function(router){
+
+            router.all('/*', (req, res, next) => {
+
+                req.app.locals.layout = 'main';
+                next();
+            });
+
             router.get('/chat/:name', this.getchatPage);
             router.post('/chat/:name', this.chatPostPage);
         },
@@ -70,6 +77,7 @@ module.exports = function(async, Users, Message){
                         countNumberOfTrue++;
                 }
 
+
                 res.render('private/privatechat', {title: 'Footballkik - Private Chat', user:req.user, data: result1, chat: result2, chats:result3, name:nameParams,
                     numberOfTrue: countNumberOfTrue});
             });
@@ -112,7 +120,7 @@ module.exports = function(async, Users, Message){
                 res.redirect('/chat/'+req.params.name);
             });
 
-           //.PostRequest(req, res, '/chat/'+req.params.name);
+            FriendResult.PostRequest(req, res, '/chat/'+req.params.name);
 
         }
     }

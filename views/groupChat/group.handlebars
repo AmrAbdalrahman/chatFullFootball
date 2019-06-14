@@ -109,6 +109,40 @@
 
                             <ul id="messages" class="list-unstyled">
 
+                                {{#compare groupMsg.length ">" 0 }}
+                                    {{#each groupMsg}}
+                                        {{#ifCond ../groupName '===' name}}
+                                            <li class="left">
+                                       <span class="chat-img1 pull-left">
+                                           <img src="http://placehold.it/300x300" class="img-circle" alt="">
+                                       </span>
+                                                <div class="chat-body1">
+                                                    <span class="chat-name">{{sender.username}}</span>
+                                                    <br>
+                                                    {{body}}
+
+                                                </div>
+                                            </li>
+
+                                            {{#ifCond ../name '===' (lowercase sender.username)}}
+                                                <li class="left">
+                                       <span class="chat-img1 pull-left">
+                                           <img src="http://placehold.it/300x300" class="img-circle" alt="">
+                                       </span>
+                                                    <div class="chat-body1">
+                                                        <span class="chat-name">{{senderName}}</span>
+                                                        <br>
+                                                        {{message}}
+
+                                                    </div>
+                                                </li>
+                                            {{/ifCond}}
+
+
+                                        {{/ifCond}}
+                                    {{/each}}
+                                {{/compare}}
+
                             </ul>
 
                             <script id="message-template" type="text/template">
@@ -217,9 +251,11 @@
 
 {{#section 'script'}}
     <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/messagelink.js"></script>
     <script src="/js/group/groupChat.js"></script>
     <script src="/js/group/sendRequest.js"></script>
     <script src="/js/global.js"></script>
+    <script src="/js/deparam.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
 {{/section}}
 

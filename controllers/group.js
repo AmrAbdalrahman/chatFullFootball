@@ -72,7 +72,14 @@ module.exports = function (Users, async, Message, FriendResult, Group) {
                 const result2 = results[1];
                 const result3 = results[2];
 
-                res.render('groupchat/group', {title: 'Footballkik - Group', user:req.user, groupName:name, data: result1, chat:result2, groupMsg: result3});
+                let countNumberOfTrue = 0;
+                for(let i = 0; i < result2.length; ++i){
+                    if(result2[i].body.isRead === false)
+                        countNumberOfTrue++;
+                }
+
+                res.render('groupchat/group', {title: 'Footballkik - Group', user:req.user, groupName:name, data: result1, chat:result2,
+                    groupMsg: result3,numberOfTrue: countNumberOfTrue});
             });
         },
 

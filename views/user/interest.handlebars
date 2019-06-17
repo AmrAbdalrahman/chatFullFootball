@@ -1,0 +1,163 @@
+{{#section 'styles'}}
+    <link rel="stylesheet" href="/css/group.css">
+    <link rel="stylesheet" href="/css/profile.css">
+{{/section}}
+
+{{#section 'title'}}
+    {{title}}
+{{/section}}
+
+{{#section 'header'}}
+    {{> _header}}
+{{/section}}
+
+
+<div class="col-md-12 mob-clearfix margin-80">
+    <input type="hidden" id="name-user" value="{{user.username}}">
+    <input type="hidden" id="name-image" value="{{user.userImage}}">
+
+    <div class="col-md-12">
+        <div class="chat_container">
+            <div class="row">
+                <!-- LEFT -->
+
+                <div class="col-sm-4 col-md-3">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="profile-sidebar">
+                                <div class="img-container">
+                                    <img src="https://fotballkik.s3.amazonaws.com/{{user.userImage}}" class="img-responsive img-user" id="show_img">
+                                </div>
+
+                                <div class="profile-usertitle">
+                                    <div class="profile-usertitle-name">
+                                        {{user.fullname}}
+                                    </div>
+                                    <div class="profile-usertitle-job">
+                                        {{user.username}}
+                                    </div>
+                                </div>
+
+                                <div class="profile-usermenu">
+                                    <ul class="nav">
+                                        <li>
+                                            <a href="#" style="color:#4aa1f3 !important">
+                                                <i class="fa fa-home" style="color:#4aa1f3 !important"></i>
+                                                Overview
+                                            </a>
+                                        </li>
+                                        <li >
+                                            <a href="#" style="color:#4aa1f3 !important">
+                                                <i class="fa fa-user" style="color:#4aa1f3 !important"></i>
+                                                Profile
+                                            </a>
+                                        </li>
+                                        <li class="active">
+                                            <a href="/settings/interests" style="color:#4aa1f3 !important">
+                                                <i class="fa fa-check" style="color:#4aa1f3 !important"></i>
+                                                Interests
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <!--MIDDLE-->
+                <div class="col-sm-8 col-md-9 mob-50">
+
+                    <div style="margin-top: 20px;">
+                        <div class="user-display">
+
+                            <h3 class="user-display-head" style="color:#4aa1f3 !important">Favourite Clubs</h3>
+                            <hr />
+                            <p style="margin-bottom:30px;">
+                                <span class="glyphicon glyphicon-check"></span>
+                            </p>
+
+                            <div class="form-group ad-30" style="margin-top:18px;">
+                                <div class="input-group">
+                                    <input id="favClub" class="form-control add-items" name="favClub" type="text" style="">
+
+                                    <span class="input-group-btn">
+					<button class="btn btn-default add-items-btn" id="favClubBtn" style="font-weight:bold; background-color:#4aa1f3">Add Club</button>
+				</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div style="margin-top: 20px;">
+                        <div class="user-display">
+
+                            <h3 class="user-display-head" style="color:#4aa1f3 !important">Favourite Players</h3>
+                            <hr />
+                            <p style="margin-bottom:30px;">
+                                <span class="glyphicon glyphicon-check"></span>
+                            </p>
+
+                            <div class="form-group ad-30" style="margin-top:18px;">
+                                <div class="input-group">
+                                    <input id="favClub" class="form-control add-items" name="favClub" type="text" style="">
+
+                                    <span class="input-group-btn">
+					<button class="btn btn-default add-items-btn" id="favClubBtn" style="font-weight:bold; background-color:#4aa1f3">Add Player</button>
+				</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div style="margin-top: 20px;">
+                        <div class="user-display">
+
+                            <h3 class="user-display-head" style="color:#4aa1f3 !important">Favourite National Teams</h3>
+                            <hr />
+                            <p style="margin-bottom:30px;">
+                                <span class="glyphicon glyphicon-check"></span>
+                            </p>
+
+                            <div class="form-group ad-30" style="margin-top:18px;">
+                                <div class="input-group">
+                                    <input id="favClub" class="form-control add-items" name="favClub" type="text" style="">
+
+                                    <span class="input-group-btn">
+					<button class="btn btn-default add-items-btn" id="favClubBtn" style="font-weight:bold; background-color:#4aa1f3">Add Team</button>
+				</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{{#section 'script'}}
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/messagelink.js"></script>
+    <script src="/js/group/sendRequest.js"></script>
+    <script src="/js/user/profile.js"></script>
+    <script src="/js/home.js"></script>
+    <script src="/js/global.js"></script>
+    <script src="/js/deparam.js"></script>
+{{/section}}
+
+

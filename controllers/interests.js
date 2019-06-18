@@ -72,54 +72,68 @@ module.exports = function (async, Users, Message, FriendResult) {
         },
 
         postInterestPage: function(req, res){
-            FriendResult.PostRequest(req, res, '/settings/profile');
+            FriendResult.PostRequest(req, res, '/settings/interests');
 
-            async.waterfall([
+            async.parallel([
                 function(callback){
-                    Users.findOne({'_id':req.user._id}, (err, result) => {
-                        callback(err, result);
-                    })
-                },
-
-                function(result, callback){
-                    if(req.body.upload === null || req.body.upload === ''){
+                    if(req.body.favClub){
                         Users.updateOne({
-                                '_id':req.user._id
+                                '_id':req.user._id,
+                                'favClub.clubName': {$ne: req.body.favClub}
                             },
                             {
-                                username: req.body.username,
-                                fullname: req.body.fullname,
-                                mantra: req.body.mantra,
-                                gender: req.body.gender,
-                                country: req.body.country,
-                                userImage: result.userImage
-                            },
-                            {
-                                upsert: true
-                            }, (err, result) => {
-                                res.redirect('/settings/profile');
+                                $push: {favClub: {
+                                        clubName: req.body.favClub
+                                    }}
+                            }, (err, result1) => {
+                                callback(err, result1);
                             })
-                    } else if(req.body.upload !== null || req.body.upload !== ''){
+                    }
+                },
+            ], (err, results) => {
+                res.redirect('/settings/interests');
+            });
+
+            async.parallel([
+                function(callback){
+                    if(req.body.favPlayer){
                         Users.updateOne({
-                                '_id':req.user._id
+                                '_id':req.user._id,
+                                'favPlayer.playerName': {$ne: req.body.favPlayer}
                             },
                             {
-                                username: req.body.username,
-                                fullname: req.body.fullname,
-                                mantra: req.body.mantra,
-                                gender: req.body.gender,
-                                country: req.body.country,
-                                userImage: req.body.upload
-                            },
-                            {
-                                upsert: true
-                            }, (err, result) => {
-                                res.redirect('/settings/profile');
+                                $push: {favPlayer: {
+                                        playerName: req.body.favPlayer
+                                    }}
+                            }, (err, result2) => {
+                                callback(err, result2);
                             })
                     }
                 }
-            ]);
-        },
+            ], (err, results) => {
+                res.redirect('/settings/interests');
+            });
+
+            async.parallel([
+                function(callback){
+                    if(req.body.nationalTeam){
+                        Users.updateOne({
+                                '_id':req.user._id,
+                                'favNationalTeam.teamName': {$ne: req.body.nationalTeam}
+                            },
+                            {
+                                $push: {favNationalTeam: {
+                                        teamName: req.body.nationalTeam
+                                    }}
+                            }, (err, result3) => {
+                                callback(err, result3);
+                            })
+                    }
+                }
+            ], (err, results) => {
+                res.redirect('/settings/interests');
+            });
+        }
 
     }
 }

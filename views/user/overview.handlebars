@@ -13,8 +13,8 @@
 
 
 <div class="col-md-12 mob-clearfix margin-80">
-    <input type="hidden" id="name-user" value="{{user.username}}">
-    <input type="hidden" id="name-image" value="{{user.userImage}}">
+    <input type="hidden" id="name-user" value="{{data.username}}">
+    <input type="hidden" id="name-image" value="{{data.userImage}}">
 
     <div class="col-md-12">
         <div class="chat_container">
@@ -33,33 +33,22 @@
 
                                 <div class="profile-usertitle">
                                     <div class="profile-usertitle-name">
-                                        {{user.fullname}}
+                                        {{data.fullname}}
                                     </div>
                                     <div class="profile-usertitle-job">
-                                        {{user.username}}
+                                        {{data.username}}
                                     </div>
                                 </div>
 
                                 <div class="profile-usermenu">
                                     <ul class="nav">
                                         <li>
-                                            <a href="/profile/{{user.username}}" style="color:#4aa1f3 !important">
+                                            <a href="/profile/{{data.username}}" style="color:#4aa1f3 !important">
                                                 <i class="fa fa-home" style="color:#4aa1f3 !important"></i>
                                                 Overview
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="/settings/profile" style="color:#4aa1f3 !important">
-                                                <i class="fa fa-user" style="color:#4aa1f3 !important"></i>
-                                                Profile
-                                            </a>
-                                        </li>
-                                        <li class="active">
-                                            <a href="/settings/interests" style="color:#4aa1f3 !important">
-                                                <i class="fa fa-check" style="color:#4aa1f3 !important"></i>
-                                                Interests
-                                            </a>
-                                        </li>
+
                                     </ul>
                                 </div>
 
@@ -81,22 +70,11 @@
 
                                 <h3 class="user-display-head" style="color:#4aa1f3 !important">Favourite Clubs</h3>
                                 <hr/>
-                                {{#each user.favClub}}
+                                {{#each data.favClub}}
                                     <p style="margin-bottom:30px; color:#4aa1f3">
                                         <span class="glyphicon glyphicon-check" style="color: grey;">{{clubName}}</span>
                                     </p>
                                 {{/each}}
-                                <div class="form-group ad-30" style="margin-top:18px;">
-                                    <div class="input-group">
-                                        <input id="favClub" class="form-control add-items" name="favClub" type="text"
-                                               style="">
-
-                                        <span class="input-group-btn">
-					<button class="btn btn-default add-items-btn" id="favClubBtn"
-                            style="font-weight:bold; background-color:#4aa1f3; color: #fff;">Add Club</button>
-				</span>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
@@ -106,23 +84,12 @@
 
                                 <h3 class="user-display-head" style="color:#4aa1f3 !important">Favourite Players</h3>
                                 <hr/>
-                                {{#each user.favPlayer}}
+                                {{#each data.favPlayer}}
                                     <p style="margin-bottom:30px; color:#4aa1f3">
                                         <span class="glyphicon glyphicon-check" style="color: grey;">{{playerName}}</span>
                                     </p>
                                 {{/each}}
 
-                                <div class="form-group ad-30" style="margin-top:18px;">
-                                    <div class="input-group">
-                                        <input id="favPlayer" class="form-control add-items" name="favPlayer"
-                                               type="text" style="">
-
-                                        <span class="input-group-btn">
-					<button class="btn btn-default add-items-btn" id="favPlayerBtn"
-                            style="font-weight:bold; background-color:#4aa1f3; color: #fff;">Add Player</button>
-				</span>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
@@ -133,23 +100,12 @@
                                 <h3 class="user-display-head" style="color:#4aa1f3 !important">Favourite National
                                     Teams</h3>
                                 <hr/>
-                                {{#each user.favNationalTeam}}
+                                {{#each data.favNationalTeam}}
                                     <p style="margin-bottom:30px; color:#4aa1f3">
                                         <span class="glyphicon glyphicon-check" style="color: grey;">{{teamName}}</span>
                                     </p>
                                 {{/each}}
 
-                                <div class="form-group ad-30" style="margin-top:18px;">
-                                    <div class="input-group">
-                                        <input id="nationalTeam" class="form-control add-items" name="nationalTeam"
-                                               type="text" style="">
-
-                                        <span class="input-group-btn">
-					<button class="btn btn-default add-items-btn" id="nationalTeamBtn"
-                            style="font-weight:bold; background-color:#4aa1f3; color: #fff;">Add Team</button>
-				</span>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 

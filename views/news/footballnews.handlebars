@@ -1,0 +1,51 @@
+{{#section 'styles'}}
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/news.css">
+{{/section}}
+
+{{#section 'title'}}
+    {{title}}
+{{/section}}
+
+{{#section 'header'}}
+    {{> _header}}
+{{/section}}
+
+
+
+<div class="col-md-12">
+    <input type="hidden" id="name-user" value="{{user.username}}">
+    <input type="hidden" id="name-image" value="{{user.userImage}}">
+
+
+    <div class="col-md-12">
+
+        <h1 class="news-mainhead">
+            Latest News
+        </h1>
+
+    </div>
+
+    <div class="col-md-12 col-sm-12 news-bottom" id="newsResults"></div>
+
+    <div class="col-md-12">
+        <button id="loadMore" class="btn col-xs-12 n-hide-screen-large">Load More</button>
+
+        <p id="top">
+            <a href="#top" id="linkTop">Back to top</a>
+        </p>
+
+    </div>
+
+
+
+</div>
+
+
+{{#section 'script'}}
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/group/sendRequest.js"></script>
+    <script src="/js/home.js"></script>
+    <script src="/js/global.js"></script>
+    <script src="/js/news/footballnews.js"></script>
+{{/section}}

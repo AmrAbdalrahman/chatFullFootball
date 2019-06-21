@@ -13,8 +13,11 @@ const passport = require('passport');
 const SocketIO = require('socket.io');
 const  {Users} = require('./helpers/UsersClass');
 const  {Global} = require('./helpers/Global');
-
+const helmet = require('helmet');
+const compression = require('compression');
+const secret = require('./secret/secretFile');
 const container = require('./container');
+
 
 
 //Handlebars Helpers
@@ -23,15 +26,25 @@ const container = require('./container');
 } = require('./helpers/hbs');*/
 
 
-container.resolve(function (users,_,admin, home, group,results,privateChat, profile, interests) {
+container.resolve(function (users,_,admin, home, group,results,privateChat, profile, interests, news) {
 
     //Map global promise - get rid of warning
     mongoose.Promise = global.Promise;
 
 //Mongoose Connect
+
+    mongoose.connect(secret.mongoURI, {useNewUrlParser: true}).then(() => {
+        console.log('MongoDB Connected');
+    }).catch(err => console.log(err));
+
+    /*
+    //dev
     mongoose.connect('mongodb://localhost/footballkik', {useNewUrlParser: true}).then(() => {
         console.log('MongoDB Connected');
     }).catch(err => console.log(err));
+
+    */
+
     mongoose.set('useFindAndModify', false);
     mongoose.set('useCreateIndex', true);
     mongoose.set('useNewUrlParser', true);
@@ -44,10 +57,13 @@ container.resolve(function (users,_,admin, home, group,results,privateChat, prof
         const server = http.createServer(app);
         const io = SocketIO(server);
 
-        server.listen(3000, function () {
+        server.listen(process.env.PORT || 3000, function () {
             console.log('Listening on port 3000');
         });
         ConfigureExpress(app);
+
+        app.use(compression());
+        app.use(helmet());
 
         require('./socket/groupChat')(io, Users);
         require('./socket/friend')(io);
@@ -64,8 +80,13 @@ container.resolve(function (users,_,admin, home, group,results,privateChat, prof
         privateChat.SetRouting(router);
         profile.SetRouting(router);
         interests.SetRouting(router);
+        news.SetRouting(router);
 
         app.use(router);
+
+        app.use(function (req, res) {
+            res.render('404');
+        })
     }
 
 
@@ -112,6 +133,8 @@ container.resolve(function (users,_,admin, home, group,results,privateChat, prof
         app.use(passport.session());
 
         app.locals._ = _;
+
+
     }
 
 

@@ -78,7 +78,7 @@ module.exports = function (Users, async, Message, FriendResult, Group) {
                         countNumberOfTrue++;
                 }
 
-                res.render('groupchat/group', {title: 'Footballkik - Group', user:req.user, groupName:name, data: result1, chat:result2,
+                res.render('groupChat/group', {title: 'Footballkik - Group', user:req.user, groupName:name, data: result1, chat:result2,
                     groupMsg: result3,numberOfTrue: countNumberOfTrue});
             });
         },
